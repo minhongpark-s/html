@@ -1,4 +1,4 @@
-var xmlHttp = null; //
+var xmlHttp = null;
 
 function createXmlHttpRequestObject()
 {

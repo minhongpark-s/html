@@ -2,7 +2,7 @@ var call_stack = 1;
 var updateInterval = 1000;
 var x0=0,y0=0;
 
-//차트 초기화
+//그림판 초기화 함수
 function init()
 {
     call_stack=1;
@@ -40,19 +40,21 @@ function handleResults(data)
     else{
         responseText = data;
     }
+    // 응답 확인
     div1.innerHTML+= "돌아온 값은: "+responseText+"<br/>";
-    // 서버 응답을 쪼갬.
+    // 서버 응답을 나눈다.
     var newCoords = responseText.split(",");
     // 좌표를 노드에 그린다.
     drawLineTo(newCoords[0],newCoords[1]);
     // 스택 증가
     call_stack++;
+    // 반환값 확인
     div1.innerHTML += call_stack +"번째 반복입니다. 서버로부터 반환된 값은 X:" + newCoords[0] + " , Y: " + newCoords[1] + ", 돌아온 콜스택 수는:"+ newCoords[2]+ "<br/><br/>";
     // updateInterval 후 반복.
     setTimeout("updateChart()",updateInterval);
 }
 
-//그림 그리는 함수
+//선 그리는 함수
 function drawLineTo(x,y)
 {
     const canvas = document.getElementById('canvas');
@@ -63,10 +65,4 @@ function drawLineTo(x,y)
     x0=x;
     y0=y;
 }
-//반복적인 서버 요청 시작
-    //쿼리문 보냄
-    //AJAX 요청을 보냄
-    //서버에서 응답이 왔을때 실행되는 함수 생성
-        //그림을 그리는 함수 호출
-    //계속반복
 
