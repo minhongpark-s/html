@@ -1,6 +1,9 @@
 var call_stack = 1;
 var updateInterval = 1000;
-var x0=0,y0=0;
+var x1=0,y1=0;
+var x2=0,y2=0;
+var x3=0,y3=0;
+var color="";
 
 //그림판 초기화 함수
 function init()
@@ -45,24 +48,74 @@ function handleResults(data)
     // 서버 응답을 나눈다.
     var newCoords = responseText.split(",");
     // 좌표를 노드에 그린다.
-    drawLineTo(newCoords[0],newCoords[1]);
+    drawLineTo_1(newCoords[0],newCoords[1],newCoords[2]);
+    drawLineTo_2(newCoords[3],newCoords[4],newCoords[5]);
+    drawLineTo_3(newCoords[6],newCoords[7],newCoords[8]);
     // 스택 증가
-    call_stack++;
+    if(newCoords[0]) call_stack++;
     // 반환값 확인
-    div1.innerHTML += call_stack +"번째 반복입니다. 서버로부터 반환된 값은 X:" + newCoords[0] + " , Y: " + newCoords[1] + ", 돌아온 콜스택 수는:"+ newCoords[2]+ "<br/><br/>";
+    div1.innerHTML += call_stack-1 +"번째 반복입니다. <br/>" 
+    +"서버로부터 반환된 xy_1의 값은 X:" + newCoords[0] + " , Y: " + newCoords[1] + ", 선의 색상은: "+ newCoords[2]+ "<br/>"
+    +"서버로부터 반환된 xy_2의 값은 X:" + newCoords[3] + " , Y: " + newCoords[4] + ", 선의 색상은: "+ newCoords[5]+ "<br/>"
+    +"서버로부터 반환된 xy_3의 값은 X:" + newCoords[6] + " , Y: " + newCoords[7] + ", 선의 색상은: "+ newCoords[8]+ "<br/><br/>";
     // updateInterval 후 반복.
     setTimeout("updateChart()",updateInterval);
 }
 
 //선 그리는 함수
-function drawLineTo(x,y)
+function drawLineTo_1(x,y,color)
 {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext("2d");
-    ctx.moveTo(x0,y0);
-    ctx.lineTo(x,y);
-    ctx.stroke();
-    x0=x;
-    y0=y;
+    ctx.beginPath();
+    if(x1==0) ctx.strokeStyle='white';
+    else ctx.strokeStyle=color;
+    if(x){
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(x,y);
+        ctx.lineWidth=2;
+        ctx.stroke();
+        ctx.closePath();
+        x1=x;
+        y1=y;
+    }
+    else{
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(x1+10,y);
+        ctx.lineWidth=2;
+        ctx.stroke();
+        ctx.closePath();
+    }
 }
 
+function drawLineTo_2(x,y,color)
+{
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext("2d");
+    ctx.beginPath();
+    if(x2==0) ctx.strokeStyle='white';
+    else ctx.strokeStyle=color;
+    ctx.moveTo(x2,y2);
+    ctx.lineTo(x,y);
+    ctx.lineWidth=2;
+    ctx.stroke();
+    ctx.closePath();
+    x2=x;
+    y2=y;
+}
+
+function drawLineTo_3(x,y,color)
+{
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext("2d");
+    ctx.beginPath();
+    if(x3==0) ctx.strokeStyle='white';
+    else ctx.strokeStyle=color;
+    ctx.moveTo(x3,y3);
+    ctx.lineTo(x,y);
+    ctx.lineWidth=2;
+    ctx.stroke();
+    ctx.closePath();
+    x3=x;
+    y3=y;
+}

@@ -4,14 +4,60 @@
     $db_user = 'minhongpark';
     $db_pwd = '1234';
     $database = 'xy';
-    $table = 'xy_1'; 
+    $string = "";
 
     // get 방식으로 넘겨온 값 읽음
     $call_stack = $_GET['call_stack'];
     // 데이터베이스와 연결
     $dbc = mysqli_connect($db_host, $db_user, $db_pwd, $database )
         or die("Can't connect to database");
-    // Query 문자열 생성
+
+    function getResultString($table_)
+    {
+            global $db_host;
+            global $db_user;
+            global $db_pwd;
+            global $database;
+            global $table;
+            global $string;
+            global $call_stack;
+            global $dbc;
+            $query1 = "select count(*) from {$table_}";
+            $query2 = "select x,y from $table_ where num= $call_stack";
+            $result1 = mysqli_query($dbc,$query1)
+                or die("Error querying database.");
+            $result2 = mysqli_query($dbc,$query2)
+                or die("Error querying database.");
+            $row1=mysqli_fetch_array($result1);
+            $count1 = $row1['count(*)'];
+            $row2=mysqli_fetch_array($result2);
+            if($call_stack<=$count1)
+            {
+                return $row2['x'].','.$row2['y'].','.colorSelection($table_).',';
+                if(ob_get_length()) ob_clean();
+            }
+    }
+    
+    $string = $string.getResultString('xy_1');
+    $string = $string.getResultString('xy_2');
+    $string = $string.getResultString('xy_3');
+
+    echo $string;
+
+    function colorSelection($table__)
+    {
+        switch ($table__) {
+            case 'xy_1':
+                return 'pink';
+            case 'xy_2':
+                return 'yellow';
+            case 'xy_3':
+                return 'red';
+            default:
+                return 'white';
+        }
+    }
+    /*// Query 문자열 생성
     $query1 = "select count(*) from {$table}";
     $query2 = "select x,y from $table where num= $call_stack";
     // 데이터베이스에 Query 실행명령
@@ -35,7 +81,8 @@
         header('pragma: no-cache');
         // 클라이언트로 문자열 반환
         echo $return;
-    }
+    } */
     // 데이터베이스 연결 닫음
+
     mysqli_close($dbc);
 ?>
