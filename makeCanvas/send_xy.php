@@ -52,7 +52,7 @@
             case 'xy_1':
                 return 'red';
             case 'xy_2':
-                return 'yellow';
+                return 'orange';
             case 'xy_3':
                 return 'green';
             case 'xy_4':

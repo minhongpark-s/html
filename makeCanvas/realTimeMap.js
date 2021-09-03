@@ -87,7 +87,7 @@ function drawLineTo_1(x,y,color)
     }
     else{
         ctx.moveTo(x1,y1);
-        ctx.lineTo(x1+10,y1);
+        ctx.lineTo(x1,y1);
         ctx.lineWidth=2;
         ctx.stroke();
         ctx.closePath();
@@ -107,12 +107,12 @@ function drawLineTo_2(x,y,color)
         ctx.lineWidth=2;
         ctx.stroke();
         ctx.closePath();
-        x1=x;
-        y1=y;
+        x2=x;
+        y2=y;
     }
     else{
         ctx.moveTo(x2,y2);
-        ctx.lineTo(x2+10,y2);
+        ctx.lineTo(x2,y2);
         ctx.lineWidth=2;
         ctx.stroke();
         ctx.closePath();
@@ -132,12 +132,12 @@ function drawLineTo_3(x,y,color)
         ctx.lineWidth=2;
         ctx.stroke();
         ctx.closePath();
-        x1=x;
-        y1=y;
+        x3=x;
+        y3=y;
     }
     else{
         ctx.moveTo(x3,y3);
-        ctx.lineTo(x3+10,y3);
+        ctx.lineTo(x3,y3);
         ctx.lineWidth=2;
         ctx.stroke();
         ctx.closePath();
@@ -162,7 +162,7 @@ function drawLineTo_4(x,y,color)
     }
     else{
         ctx.moveTo(x4,y4);
-        ctx.lineTo(x4+10,y4);
+        ctx.lineTo(x4,y4);
         ctx.lineWidth=2;
         ctx.stroke();
         ctx.closePath();
@@ -187,7 +187,7 @@ function drawLineTo_5(x,y,color)
     }
     else {
         ctx.moveTo(x5,y5);
-        ctx.lineTo(x5+10,y5);
+        ctx.lineTo(x5,y5);
         ctx.lineWidth=2;
         ctx.stroke();
         ctx.closePath();
