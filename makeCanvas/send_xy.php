@@ -41,6 +41,8 @@
     $string = $string.getResultString('xy_1');
     $string = $string.getResultString('xy_2');
     $string = $string.getResultString('xy_3');
+    $string = $string.getResultString('xy_4');
+    $string = $string.getResultString('xy_5');
 
     echo $string;
 
@@ -48,11 +50,15 @@
     {
         switch ($table__) {
             case 'xy_1':
-                return 'pink';
+                return 'red';
             case 'xy_2':
                 return 'yellow';
             case 'xy_3':
-                return 'red';
+                return 'green';
+            case 'xy_4':
+                return 'blue';
+            case 'xy_5':
+                return 'purple';
             default:
                 return 'white';
         }
