@@ -1,4 +1,4 @@
-var call_stack = 1;
+var call_stack;
 var updateInterval = 1000;
 var x1=0,y1=0;
 var x2=0,y2=0;
@@ -12,9 +12,48 @@ function init()
 {
     call_stack=1;
 
+    xDivSize=40;
+    yDivSize=40;
+
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext("2d");
-    ctx.beginPath();
+    xCut=canvas.width/xDivSize;
+    yCut=canvas.height/yDivSize;
+    for(var i=0; i<xCut; i++){
+        ctx.beginPath();
+        ctx.strokeStyle='gray';
+        ctx.lineWidth='1';
+        ctx.moveTo(xDivSize*i,0)
+        ctx.lineTo(xDivSize*i,canvas.height);
+        ctx.setLineDash([5]);
+        ctx.stroke();
+        ctx.closePath();
+    }
+    for(var i=0; i<yCut; i++){
+        ctx.beginPath();
+        ctx.strokeStyle='gray';
+        ctx.lineWidth='1';
+        ctx.moveTo(0,yDivSize*i)
+        ctx.lineTo(canvas.width,yDivSize*i);
+        ctx.setLineDash([5]);
+        ctx.stroke();
+        ctx.closePath();
+    }
+    for(var i=1; i<=xCut; i++){
+        ctx.strokeStyle='black';
+        ctx.fillText(xDivSize*i,xDivSize*i-17,10);
+        ctx.strokeText(xDivSize*i,xDivSize*i-17,10);
+    }
+    for(var i=1; i<=yCut; i++){
+        ctx.strokeStyle='black';
+        ctx.fillText(xDivSize*i,0,yDivSize*i);
+        ctx.strokeText(xDivSize*i,0,yDivSize*i);
+    }
+    ctx.lineWidth='2';
+    ctx.fillText('0',3,10);
+    ctx.strokeText('0',3,10);
+    ctx.setLineDash([0]);
+    console.log(canvas.height/xDivSize);
 
     //반복적인 서버 요청 시작
     setTimeout("updateChart()", updateInterval);
@@ -74,8 +113,14 @@ function drawLineTo_1(x,y,color)
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext("2d");
     ctx.beginPath();
-    if(x1==0) ctx.strokeStyle='white';
-    else ctx.strokeStyle=color;
+    if(x1==0){ 
+        ctx.strokeStyle='white';
+        ctx.globalAlpha = 0;
+    }
+    else{
+        ctx.strokeStyle=color;
+        ctx.globalAlpha =1;
+    }
     if(x){
         ctx.moveTo(x1,y1);
         ctx.lineTo(x,y);
@@ -99,8 +144,14 @@ function drawLineTo_2(x,y,color)
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext("2d");
     ctx.beginPath();
-    if(x2==0) ctx.strokeStyle='white';
-    else ctx.strokeStyle=color;
+    if(x2==0){ 
+        ctx.strokeStyle='white';
+        ctx.globalAlpha = 0;
+    }
+    else{
+        ctx.strokeStyle=color;
+        ctx.globalAlpha =1;
+    }
     if(x){
         ctx.moveTo(x2,y2);
         ctx.lineTo(x,y);
@@ -124,8 +175,14 @@ function drawLineTo_3(x,y,color)
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext("2d");
     ctx.beginPath();
-    if(x3==0) ctx.strokeStyle='white';
-    else ctx.strokeStyle=color;
+    if(x3==0){ 
+        ctx.strokeStyle='white';
+        ctx.globalAlpha = 0;
+    }
+    else{
+        ctx.strokeStyle=color;
+        ctx.globalAlpha =1;
+    }
     if(x){
         ctx.moveTo(x3,y3);
         ctx.lineTo(x,y);
@@ -149,8 +206,14 @@ function drawLineTo_4(x,y,color)
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext("2d");
     ctx.beginPath();
-    if(x4==0) ctx.strokeStyle='white';
-    else ctx.strokeStyle=color;
+    if(x4==0){ 
+        ctx.strokeStyle='white';
+        ctx.globalAlpha = 0;
+    }
+    else{
+        ctx.strokeStyle=color;
+        ctx.globalAlpha =1;
+    }
     if(x){
         ctx.moveTo(x4,y4);
         ctx.lineTo(x,y);
@@ -174,8 +237,14 @@ function drawLineTo_5(x,y,color)
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext("2d");
     ctx.beginPath();
-    if(x5==0) ctx.strokeStyle='white';
-    else ctx.strokeStyle=color;
+    if(x5==0){ 
+        ctx.strokeStyle='white';
+        ctx.globalAlpha = 0;
+    }
+    else{
+        ctx.strokeStyle=color;
+        ctx.globalAlpha =1;
+    }
     if(x){
         ctx.moveTo(x5,y5);
         ctx.lineTo(x,y);
