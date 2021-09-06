@@ -19,7 +19,7 @@ function init()
     const ctx = canvas.getContext("2d");
     xCut=canvas.width/xDivSize;
     yCut=canvas.height/yDivSize;
-    for(var i=0; i<xCut; i++){
+    for(var i=1; i<xCut; i++){
         ctx.beginPath();
         ctx.strokeStyle='gray';
         ctx.lineWidth='1';
@@ -29,7 +29,7 @@ function init()
         ctx.stroke();
         ctx.closePath();
     }
-    for(var i=0; i<yCut; i++){
+    for(var i=1; i<yCut; i++){
         ctx.beginPath();
         ctx.strokeStyle='gray';
         ctx.lineWidth='1';
@@ -40,6 +40,7 @@ function init()
         ctx.closePath();
     }
     for(var i=1; i<=xCut; i++){
+        ctx.font = "15px Arial";
         ctx.strokeStyle='black';
         ctx.fillText(xDivSize*i,xDivSize*i-17,10);
         ctx.strokeText(xDivSize*i,xDivSize*i-17,10);
@@ -52,7 +53,7 @@ function init()
     ctx.lineWidth='2';
     ctx.fillText('0',3,10);
     ctx.strokeText('0',3,10);
-    ctx.setLineDash([0]);
+    ctx.setLineDash([0]); // 점선 간격 제거
     console.log(canvas.height/xDivSize);
 
     //반복적인 서버 요청 시작
