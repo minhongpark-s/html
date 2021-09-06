@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
+  <head>
         <meta charset="utf-8">
         <script src="prefixfree.min.js"></script>
         <link href="css_data_.css" rel="stylesheet" type="text/css" />
-    </head>
-    <body>
+  </head>
+  <body>
+    <script src="realTimeMap.js"></script>
+    <script src="ajaxRequest.js"></script>
+    <form>
       <fieldset>
         <legend>Required Input</legend>
       
-        &nbsp;Access Type : <input type="radio" id="man" value="M" checked> <label for="man">A</label>&nbsp;&nbsp;
-           <input type="radio" id="woman" value="W"> <label for="woman">B</label><br>
+        &nbsp;Access Type : <input type="radio" id="A" value="A" checked> <label for="A">A</label>&nbsp;&nbsp;
+           <input type="radio" id="B" value="B"> <label for="B">B</label><br>
            
-        &nbsp;Car No. : <input type="checkbox" id="hobby1" value="1" checked> <label for="hobby1">1</label>&nbsp;&nbsp;
-               <input type="checkbox" id="hobby2" value="2"> <label for="hobby2">2</label>&nbsp;&nbsp;
-               <input type="checkbox" id="hobby3" value="3"> <label for="hobby3">3</label>&nbsp;&nbsp;
-               <input type="checkbox" id="hobby4" value="4"> <label for="hobby4">4</label>&nbsp;&nbsp;
-               <input type="checkbox" id="hobby5" value="5"> <label for="hobby5">5</label><br> 
+        &nbsp;Car No. : <input type="checkbox" id="1" value="1" checked> <label for="1">1</label>&nbsp;&nbsp;
+               <input type="checkbox" id="2" value="2" checked> <label for="2">2</label>&nbsp;&nbsp;
+               <input type="checkbox" id="3" value="3" checked> <label for="3">3</label>&nbsp;&nbsp;
+               <input type="checkbox" id="4" value="4" checked> <label for="4">4</label>&nbsp;&nbsp;
+               <input type="checkbox" id="5" value="5" checked> <label for="5">5</label><br> 
       </fieldset>
       <button type="button">Submit</button>
-      
+    </form>
+
+    <form action="change_color.php">  
       <fieldset>
         <legend>Color Selection</legend>
       <label>For No. 1 : <input type="color" name="color"></label>       	   
@@ -29,7 +34,16 @@
       <label>For No. 5 : <input type="color" name="color"></label><br>    
         </fieldset>
         
-      <button type="button" action='change_color.php'>Submit</button>
+      <button type="button">Submit</button>
     </form>
-    </body>
+
+    <form>
+      <fieldset>
+        <legend>Reset</legend>
+        &nbsp;<input type="text" id="resetNum" maxlength="1">
+        <button type="submit" onclick="reset()">check this</form>
+      </fieldset>
+    </form>
+
+  </body>
 </html>

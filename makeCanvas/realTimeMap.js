@@ -7,6 +7,24 @@ var x4=0,y4=0;
 var x5=0,y5=0;
 var color="";
 
+function reset()
+{
+    console.log("test called");
+    var resetNum= document.getElementById("resetNum");
+    console.log(resetNum);
+    param = "?resetNum="+resetNum;
+    div1.innerHTML+="resetNum값 "+resetNum+" 를 전송하려합니다. <br/>"
+    //지원되는 AJAX 이용하여 요청을 보냄.
+    if(window.getURL)
+    {
+        getURL("clear_data.php"+param,handleResults_forReset); // 서버에 요청을 보내고 응답오면 콜백할 함수 지정
+    }
+    else
+    {
+        ajaxRequest("clear_data.php"+param, handleResults_forReset);
+    }
+}
+
 //그림판 초기화 함수
 function init()
 {
@@ -106,6 +124,19 @@ function handleResults(data)
     +"서버로부터 반환된 xy_5의 값은 X:" + newCoords[12] + " , Y: " + newCoords[13] + ", 선의 색상은: "+ newCoords[14]+ "<br/><br/>";
     // updateInterval 후 반복.
     setTimeout("updateChart()",updateInterval);
+}
+
+function handleResults_forReset(data)
+{
+    // 서버 응답을 읽는다.
+    if(window.getURL){
+        responseText = data.content;
+    }
+    else{
+        responseText = data;
+    }
+    // 응답 확인
+    div1.innerHTML+= "<br>좌표값이 초기화 되었습니다.<br/>";
 }
 
 //선 그리는 함수
