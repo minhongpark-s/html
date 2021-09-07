@@ -33,8 +33,21 @@
             $row2=mysqli_fetch_array($result2);
             if($call_stack<=$count1)
             {
-                return $row2['x'].','.$row2['y'].','.colorSelection($table_).',';
+                if($row2['x'] && $row2['y']){
+                    return $row2['x'].','.$row2['y'].','.colorSelection($table_).',';
+                }
+                else{
+                    if(!$row2['x'] && !$row2['y'])
+                        return 'noData,noData,'.colorSelection($table_).',';
+                    else if(!$row2['x'] && $row2['y'])
+                        return 'noData'.','.$row2['y'].','.colorSelection($table_).',';
+                    else if($row2['x'] && !$row2['y'])
+                        return $row2['y'].','.'noData'.','.colorSelection($table_).',';
+                }
                 if(ob_get_length()) ob_clean();
+            }
+            else{
+                return 'noData,noData,noData,';
             }
     }
     
