@@ -31,7 +31,7 @@
             $row1=mysqli_fetch_array($result1);
             $count1 = $row1['count(*)'];
             $row2=mysqli_fetch_array($result2);
-            if($call_stack<=$count1)
+            if($call_stack<=$count1) 
             {
                 if($row2['x'] && $row2['y']){
                     return $row2['x'].','.$row2['y'].','.colorSelection($table_).',';
