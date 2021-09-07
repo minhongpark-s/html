@@ -1,13 +1,71 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <meta charset="UTF-8"> <!--한글을 마크업 한다.-->
+        <script src="prefixfree.min.js"></script>
+        <link href="css_data_.css" rel="stylesheet" type="text/css" />
+        <style>
+            @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+            #canvas {
+                border: 5px solid #EEE;
+            }
+            .options {
+                display: flex;
+                align-items: center;
+            }
+        </style>
     </head>
-        <frameset cols="50% , *">
-            <frame src="index_input.html"></frame>
-            <frame src="index_coord.html"></frame>
-        </frameset>
-    <body>
+    <body type="text/javascript" onload="init()">
+        <canvas id="canvas" width="600" height="600" style="border: 1px solid blue;"></canvas>
+        <script src="realTimeMap.js"></script>
+        <script src="ajaxRequest.js"></script>
+        <div style="width: 20%; float:right;" ></div>
+        
+        <div style="width: 30%; float:right; border: 3px solid blue; border-radius: 5px;" >
+            <form>
+                <fieldset>
+                <legend>Required Input</legend>
+                
+                &nbsp;Access Type : <input type="radio" id="A" value="A" checked> <label for="A">A</label>&nbsp;&nbsp;
+                    <input type="radio" id="B" value="B"> <label for="B">B</label><br>
+                    
+                &nbsp;Car No. : <input type="checkbox" id="1" value="1" checked> <label for="1">1</label>&nbsp;&nbsp;
+                        <input type="checkbox" id="2" value="2" checked> <label for="2">2</label>&nbsp;&nbsp;
+                        <input type="checkbox" id="3" value="3" checked> <label for="3">3</label>&nbsp;&nbsp;
+                        <input type="checkbox" id="4" value="4" checked> <label for="4">4</label>&nbsp;&nbsp;
+                        <input type="checkbox" id="5" value="5" checked> <label for="5">5</label><br> 
+                </fieldset>
+                <button type="button">Submit</button>
+            </form>
+        
+            <form action="change_color.php">  
+                <fieldset>
+                <legend>Color Selection</legend>
+                <label>For No. 1 : <input type="color" name="color" class="color"></label>       	   
+                <label>For No. 2 : <input type="color" name="color"></label>  
+                <label>For No. 3 : <input type="color" name="color"></label>  
+                <label>For No. 4 : <input type="color" name="color"></label>
+                <label>For No. 5 : <input type="color" name="color"></label><br>    
+                </fieldset>
+                
+                <button type="button">Submit</button>
+            </form>
+        
+            <form>
+                <fieldset>
+                <legend>Reset</legend>
+                &nbsp;<input type="text" id="resetNum" maxlength="1">
+                <button type="submit" onclick="reset()">check this</form>
+                </fieldset>
+            </form>
+        
+            <form>
+                <button type="button" onclick="start()">START</form>
+            </form>
+        </div>
 
+        <div style="width: 50%; height: 200px; border: 3px solid blue;">
+                <div id = "div1" style="width: 30%; border-width: 3px solid blue;"></div>" 
+        </div>
     </body>
 </html>

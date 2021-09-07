@@ -1,3 +1,4 @@
+console.log("realTimeMap.js called!");
 var call_stack;
 var updateInterval = 1000;
 var x1=0,y1=0;
@@ -6,6 +7,18 @@ var x3=0,y3=0;
 var x4=0,y4=0;
 var x5=0,y5=0;
 var color="";
+var start_bin=0;
+
+
+var start_cnt=1;
+console.log("called!");
+
+function start()
+{
+    start_bin=1;
+    console.log("start() called");
+    console.log("start_bin:"+start_bin);
+}
 
 function reset()
 {
@@ -28,54 +41,68 @@ function reset()
 //그림판 초기화 함수
 function init()
 {
-    call_stack=1;
+    console.log("start_cnt:"+start_cnt);
+    console.log("start_bin:"+start_bin);
+    console.log("init called!");
+    if(start_cnt){
+        call_stack=1;
 
-    xDivSize=40;
-    yDivSize=40;
+        xDivSize=40;
+        yDivSize=40;
 
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext("2d");
-    xCut=canvas.width/xDivSize;
-    yCut=canvas.height/yDivSize;
-    for(var i=1; i<xCut; i++){
-        ctx.beginPath();
-        ctx.strokeStyle='gray';
-        ctx.lineWidth='1';
-        ctx.moveTo(xDivSize*i,0)
-        ctx.lineTo(xDivSize*i,canvas.height);
-        ctx.setLineDash([5]);
-        ctx.stroke();
-        ctx.closePath();
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext("2d");
+        xCut=canvas.width/xDivSize;
+        yCut=canvas.height/yDivSize;
+        for(var i=1; i<xCut; i++){
+            ctx.beginPath();
+            ctx.strokeStyle='gray';
+            ctx.lineWidth='1';
+            ctx.moveTo(xDivSize*i,0)
+            ctx.lineTo(xDivSize*i,canvas.height);
+            ctx.setLineDash([5]);
+            ctx.stroke();
+            ctx.closePath();
+        }
+        for(var i=1; i<yCut; i++){
+            ctx.beginPath();
+            ctx.strokeStyle='gray';
+            ctx.lineWidth='1';
+            ctx.moveTo(0,yDivSize*i)
+            ctx.lineTo(canvas.width,yDivSize*i);
+            ctx.setLineDash([5]);
+            ctx.stroke();
+            ctx.closePath();
+        }
+        for(var i=1; i<=xCut; i++){
+            ctx.font = "15px Arial";
+            ctx.strokeStyle='black';
+            ctx.fillText(xDivSize*i,xDivSize*i-17,10);
+            ctx.strokeText(xDivSize*i,xDivSize*i-17,10);
+        }
+        for(var i=1; i<=yCut; i++){
+            ctx.strokeStyle='black';
+            ctx.fillText(xDivSize*i,0,yDivSize*i);
+            ctx.strokeText(xDivSize*i,0,yDivSize*i);
+        }
+        ctx.lineWidth='2';
+        ctx.fillText('0',3,10);
+        ctx.strokeText('0',3,10);
+        ctx.setLineDash([0]); // 점선 간격 제거
+        console.log("board init finished");
     }
-    for(var i=1; i<yCut; i++){
-        ctx.beginPath();
-        ctx.strokeStyle='gray';
-        ctx.lineWidth='1';
-        ctx.moveTo(0,yDivSize*i)
-        ctx.lineTo(canvas.width,yDivSize*i);
-        ctx.setLineDash([5]);
-        ctx.stroke();
-        ctx.closePath();
-    }
-    for(var i=1; i<=xCut; i++){
-        ctx.font = "15px Arial";
-        ctx.strokeStyle='black';
-        ctx.fillText(xDivSize*i,xDivSize*i-17,10);
-        ctx.strokeText(xDivSize*i,xDivSize*i-17,10);
-    }
-    for(var i=1; i<=yCut; i++){
-        ctx.strokeStyle='black';
-        ctx.fillText(xDivSize*i,0,yDivSize*i);
-        ctx.strokeText(xDivSize*i,0,yDivSize*i);
-    }
-    ctx.lineWidth='2';
-    ctx.fillText('0',3,10);
-    ctx.strokeText('0',3,10);
-    ctx.setLineDash([0]); // 점선 간격 제거
-    console.log(canvas.height/xDivSize);
-
+    console.log("start_cnt:"+start_cnt);
+    console.log("start_bin:"+start_bin);
     //반복적인 서버 요청 시작
-    setTimeout("updateChart()", updateInterval);
+    if(start_bin){
+        setTimeout("updateChart()", updateInterval);
+        console.log("Trying to start updateChart()")
+    }
+    else{
+        start_cnt=0;
+        setTimeout(init, updateInterval*10);
+        console.log("Trying to recall init()")
+    }
 }
 
 function updateChart()
